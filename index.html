@@ -157,6 +157,53 @@
 
         .glow-1 { top: -50px; left: -50px; }
         .glow-2 { bottom: -50px; right: -50px; }
+        /* =========================================
+           ✨ ANIMATIONS ✨
+           ========================================= */
+
+        /* 1. Floating effect for the main card */
+        .container {
+            animation: floatCard 6s ease-in-out infinite;
+        }
+
+        @keyframes floatCard {
+            0% { transform: translateY(0px); box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5); }
+            50% { transform: translateY(-10px); box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6); }
+            100% { transform: translateY(0px); box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5); }
+        }
+
+        /* 2. Pulsing neon glow for the profile picture */
+        .avatar-ring {
+            animation: pulseGlow 3s infinite alternate;
+        }
+
+        @keyframes pulseGlow {
+            0% { box-shadow: 0 0 15px rgba(106, 227, 123, 0.3); }
+            100% { box-shadow: 0 0 35px rgba(195, 245, 98, 0.7); }
+        }
+
+        /* 3. Smooth pop-in effect for the buttons */
+        .link-btn {
+            opacity: 0; /* Hide them initially */
+            animation: popIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        /* Stagger the buttons so they load one after the other */
+        .link-btn:nth-child(1) { animation-delay: 0.1s; }
+        .link-btn:nth-child(2) { animation-delay: 0.25s; }
+        .link-btn:nth-child(3) { animation-delay: 0.4s; }
+        .link-btn:nth-child(4) { animation-delay: 0.55s; }
+
+        @keyframes popIn {
+            0% { 
+                opacity: 0; 
+                transform: translateY(30px) scale(0.9); 
+            }
+            100% { 
+                opacity: 1; 
+                transform: translateY(0) scale(1); 
+            }
+        }
     </style>
 </head>
 <body>
