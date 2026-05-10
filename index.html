@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dipanjan Baidya - Links</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0a0510 0%, #1f103b 50%, #0a0510 100%);
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 40px;
+            padding: 40px 20px;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Profile Section */
+        .profile-section {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .avatar-ring {
+            width: 130px;
+            height: 130px;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #6ae37b, #c3f562, #4facfe);
+            padding: 4px; /* Thickness of the glowing ring */
+            box-shadow: 0 0 20px rgba(106, 227, 123, 0.4);
+        }
+
+        .avatar {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 4px solid #1a1025; /* Matches background to create gap */
+            object-fit: cover;
+            background-color: #1a1025;
+        }
+
+        h1 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+            letter-spacing: 0.5px;
+        }
+
+        .roles {
+            font-size: 0.75rem;
+            color: #e0e0e0;
+            font-weight: 500;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .location {
+            font-size: 0.8rem;
+            color: #a0a0a0;
+        }
+
+        /* Links Section */
+        .links-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .link-btn {
+            display: flex;
+            align-items: center;
+            background: linear-gradient(90deg, #6de882 0%, #c1f35f 100%);
+            padding: 12px 20px;
+            border-radius: 50px;
+            text-decoration: none;
+            color: #000000;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 15px rgba(109, 232, 130, 0.2);
+        }
+
+        .link-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(109, 232, 130, 0.4);
+        }
+
+        .icon-wrapper {
+            width: 45px;
+            height: 45px;
+            background: #111111;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 15px;
+            flex-shrink: 0;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .icon-wrapper i {
+            color: #6de882;
+            font-size: 1.2rem;
+        }
+
+        .text-wrapper {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .link-title {
+            font-weight: 700;
+            font-size: 1rem;
+            line-height: 1.2;
+            letter-spacing: 0.5px;
+        }
+
+        .link-desc {
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: #333333;
+        }
+
+        /* Decorative background elements */
+        .bg-glow {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background: rgba(147, 51, 234, 0.3);
+            filter: blur(80px);
+            border-radius: 50%;
+            z-index: -1;
+        }
+
+        .glow-1 { top: -50px; left: -50px; }
+        .glow-2 { bottom: -50px; right: -50px; }
+    </style>
+</head>
+<body>
+
+    <div class="bg-glow glow-1"></div>
+    <div class="bg-glow glow-2"></div>
+
+    <div class="container">
+        <div class="profile-section">
+            <div class="avatar-ring">
+                <img src="https://via.placeholder.com/150" alt="Dipanjan Baidya" class="avatar">
+            </div>
+            <h1>Dipanjan Baidya</h1>
+            <div class="roles">DIGITAL ENTREPRENEUR | CODER | CREATIVE DESIGNER</div>
+            <div class="location">Turning Ideas Into Reality. Kolkata, India.</div>
+        </div>
+
+        <div class="links-container">
+            <a href="#" class="link-btn" target="_blank">
+                <div class="icon-wrapper">
+                    <i class="fab fa-instagram"></i>
+                </div>
+                <div class="text-wrapper">
+                    <span class="link-title">INSTAGRAM</span>
+                    <span class="link-desc">dipan.creative</span>
+                </div>
+            </a>
+
+            <a href="mailto:contact@dipanjan.com" class="link-btn">
+                <div class="icon-wrapper">
+                    <i class="fas fa-envelope"></i>
+                </div>
+                <div class="text-wrapper">
+                    <span class="link-title">EMAIL</span>
+                    <span class="link-desc">contact@dipanjan.com</span>
+                </div>
+            </a>
+
+            <a href="#" class="link-btn" target="_blank">
+                <div class="icon-wrapper">
+                    <i class="fab fa-linkedin-in"></i>
+                </div>
+                <div class="text-wrapper">
+                    <span class="link-title">LINKEDIN</span>
+                    <span class="link-desc">Dipanjan Baidya</span>
+                </div>
+            </a>
+
+            <a href="#" class="link-btn">
+                <div class="icon-wrapper">
+                    <i class="far fa-clock"></i>
+                </div>
+                <div class="text-wrapper">
+                    <span class="link-title">COMING SOON</span>
+                    <span class="link-desc">New Projects 2024</span>
+                </div>
+            </a>
+        </div>
+    </div>
+
+</body>
+</html>
