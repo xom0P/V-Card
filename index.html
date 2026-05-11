@@ -276,6 +276,56 @@
             </a>
         </div>
     </div>
+    <script>
+        const canvas = document.getElementById('matrix-bg');
+        const ctx = canvas.getContext('2d');
+
+        // Set canvas to full screen
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        // Matrix characters (Katakana + Latin + Numbers)
+        const alphabet = 'アァカサタナハマヤャラワガザダバパイィキシチニヒミリヰギジヂビピウゥクスツヌフムユュルグズブヅプエェケセテネヘメレゲゼデベペオォコソトノホモヨョロゴゾドボポヴッンABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+        
+        const fontSize = 14;
+        const columns = canvas.width / fontSize;
+
+        // Array to track the Y coordinate of each drop
+        const rainDrops = [];
+        for (let x = 0; x < columns; x++) {
+            rainDrops[x] = 1;
+        }
+
+        const draw = () => {
+            // This creates the trailing fade effect using your dark purple theme color
+            ctx.fillStyle = 'rgba(10, 5, 16, 0.07)'; 
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Your specific neon green color for the text
+            ctx.fillStyle = '#6de882'; 
+            ctx.font = fontSize + 'px monospace';
+
+            for (let i = 0; i < rainDrops.length; i++) {
+                const text = alphabet.charAt(Math.floor(Math.random() * alphabet.length));
+                ctx.fillText(text, i * fontSize, rainDrops[i] * fontSize);
+
+                // Randomly reset a drop to the top to keep the rain staggered
+                if (rainDrops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    rainDrops[i] = 0;
+                }
+                rainDrops[i]++;
+            }
+        };
+
+        // Run the animation every 30 milliseconds
+        setInterval(draw, 30);
+
+        // Adjust canvas if the user resizes their window
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+    </script>
 
 </body>
 </html>
