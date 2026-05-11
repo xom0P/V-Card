@@ -255,12 +255,12 @@
                 </div>
             </a>
 
-            <a href="#" class="link-btn" target="_blank">
+            <a href="https://www.linkedin.com/in/dipanjanbaidya/" class="link-btn" target="_blank">
                 <div class="icon-wrapper">
                     <i class="fab fa-linkedin-in"></i>
                 </div>
                 <div class="text-wrapper">
-                    <span class="link-title">LINKEDIN(soon)</span>
+                    <span class="link-title">LINKEDIN</span>
                     <span class="link-desc">Dipanjan Baidya</span>
                 </div>
             </a>
@@ -280,50 +280,83 @@
         const canvas = document.getElementById('matrix-bg');
         const ctx = canvas.getContext('2d');
 
-        // Set canvas to full screen
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-
-        // Matrix characters (Katakana + Latin + Numbers)
+        let width, height, columns;
         const alphabet = 'アァカサタナハマヤャラワガザダバパイィキシチニヒミリヰギジヂビピウゥクスツヌフムユュルグズブヅプエェケセテネヘメレゲゼデベペオォコソトノホモヨョロゴゾドボポヴッンABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
         
-        const fontSize = 14;
-        const columns = canvas.width / fontSize;
+        let fontSize = 16;
+        let rainDrops = [];
 
-        // Array to track the Y coordinate of each drop
-        const rainDrops = [];
-        for (let x = 0; x < columns; x++) {
-            rainDrops[x] = 1;
+        function initCanvas() {
+            // Handle High-DPI (Retina) displays for crisp text on phones
+            const dpr = window.devicePixelRatio || 1;
+            width = window.innerWidth;
+            height = window.innerHeight;
+
+            canvas.width = width * dpr;
+            canvas.height = height * dpr;
+            ctx.scale(dpr, dpr);
+
+            // Make font slightly smaller on phone screens to fit more code streams
+            fontSize = width < 600 ? 12 : 16; 
+            columns = Math.floor(width / fontSize);
+
+            rainDrops = [];
+            for (let x = 0; x < columns; x++) {
+                // Stagger the initial drops so they don't fall in a solid horizontal line
+                rainDrops[x] = Math.random() * -100; 
+            }
         }
 
-        const draw = () => {
-            // This creates the trailing fade effect using your dark purple theme color
-            ctx.fillStyle = 'rgba(10, 5, 16, 0.07)'; 
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
+        initCanvas();
 
-            // Your specific neon green color for the text
+        // Battery-saving frame rate controller
+        let lastDrawTime = 0;
+        const fps = 30; // 30fps is perfect for Matrix rain without draining phone battery
+        const interval = 1000 / fps;
+
+        const draw = (currentTime) => {
+            // requestAnimationFrame is much smoother and stops running if the user switches tabs
+            requestAnimationFrame(draw);
+
+            const deltaTime = currentTime - lastDrawTime;
+            if (deltaTime < interval) return;
+            lastDrawTime = currentTime - (deltaTime % interval);
+
+            ctx.fillStyle = 'rgba(10, 5, 16, 0.1)'; 
+            ctx.fillRect(0, 0, width, height);
+
             ctx.fillStyle = '#6de882'; 
             ctx.font = fontSize + 'px monospace';
 
             for (let i = 0; i < rainDrops.length; i++) {
-                const text = alphabet.charAt(Math.floor(Math.random() * alphabet.length));
-                ctx.fillText(text, i * fontSize, rainDrops[i] * fontSize);
+                // Only draw text if it's currently on the screen
+                if (rainDrops[i] * fontSize > 0) {
+                    const text = alphabet.charAt(Math.floor(Math.random() * alphabet.length));
+                    ctx.fillText(text, i * fontSize, rainDrops[i] * fontSize);
+                }
 
-                // Randomly reset a drop to the top to keep the rain staggered
-                if (rainDrops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                if (rainDrops[i] * fontSize > height && Math.random() > 0.975) {
                     rainDrops[i] = 0;
                 }
                 rainDrops[i]++;
             }
         };
 
-        // Run the animation every 30 milliseconds
-        setInterval(draw, 30);
+        requestAnimationFrame(draw);
 
-        // Adjust canvas if the user resizes their window
+        // Smart Resize: Prevents the canvas from glitching when the mobile URL bar hides/shows
+        let resizeTimer;
+        let currentWidth = window.innerWidth;
+        
         window.addEventListener('resize', () => {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(() => {
+                // Only reset the canvas if the WIDTH changes (like rotating the phone)
+                if (window.innerWidth !== currentWidth) {
+                    currentWidth = window.innerWidth;
+                    initCanvas();
+                }
+            }, 200);
         });
     </script>
 
