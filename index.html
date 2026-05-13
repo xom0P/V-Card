@@ -31,18 +31,20 @@
             -webkit-backdrop-filter: blur(20px);
             border: 1px solid rgba(255, 255, 255, 0.05);
             border-radius: 40px;
-            padding: 40px 20px;
+            /* Pushed the bottom padding down slightly for better breathing room */
+            padding: 40px 20px 50px; 
             width: 100%;
             max-width: 400px;
             box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
             position: relative;
             overflow: hidden;
+            animation: floatCard 6s ease-in-out infinite;
         }
 
         /* Profile Section */
         .profile-section {
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
         }
 
         .avatar-ring {
@@ -51,15 +53,16 @@
             margin: 0 auto 20px;
             border-radius: 50%;
             background: linear-gradient(135deg, #6ae37b, #c3f562, #4facfe);
-            padding: 4px; /* Thickness of the glowing ring */
+            padding: 4px; 
             box-shadow: 0 0 20px rgba(106, 227, 123, 0.4);
+            animation: pulseGlow 3s infinite alternate;
         }
 
         .avatar {
             width: 100%;
             height: 100%;
             border-radius: 50%;
-            border: 4px solid #1a1025; /* Matches background to create gap */
+            border: 4px solid #1a1025; 
             object-fit: cover;
             background-color: #1a1025;
         }
@@ -84,6 +87,20 @@
             color: #a0a0a0;
         }
 
+        /* New About Section */
+        .about-section {
+            text-align: center;
+            font-size: 0.85rem;
+            color: #cccccc;
+            margin-bottom: 25px;
+            line-height: 1.5;
+            padding: 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 15px;
+        }
+
         /* Links Section */
         .links-container {
             display: flex;
@@ -101,6 +118,8 @@
             color: #000000;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             box-shadow: 0 4px 15px rgba(109, 232, 130, 0.2);
+            opacity: 0; 
+            animation: popIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
         }
 
         .link-btn:hover {
@@ -157,24 +176,12 @@
 
         .glow-1 { top: -50px; left: -50px; }
         .glow-2 { bottom: -50px; right: -50px; }
-        /* =========================================
-           ✨ ANIMATIONS ✨
-           ========================================= */
 
-        /* 1. Floating effect for the main card */
-        .container {
-            animation: floatCard 6s ease-in-out infinite;
-        }
-
+        /* Animations */
         @keyframes floatCard {
             0% { transform: translateY(0px); box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5); }
             50% { transform: translateY(-10px); box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6); }
             100% { transform: translateY(0px); box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5); }
-        }
-
-        /* 2. Pulsing neon glow for the profile picture */
-        .avatar-ring {
-            animation: pulseGlow 3s infinite alternate;
         }
 
         @keyframes pulseGlow {
@@ -182,44 +189,31 @@
             100% { box-shadow: 0 0 35px rgba(195, 245, 98, 0.7); }
         }
 
-        /* 3. Smooth pop-in effect for the buttons */
-        .link-btn {
-            opacity: 0; /* Hide them initially */
-            animation: popIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-        }
-
-        /* Stagger the buttons so they load one after the other */
+        /* Staggered load for links */
         .link-btn:nth-child(1) { animation-delay: 0.1s; }
         .link-btn:nth-child(2) { animation-delay: 0.25s; }
         .link-btn:nth-child(3) { animation-delay: 0.4s; }
         .link-btn:nth-child(4) { animation-delay: 0.55s; }
 
         @keyframes popIn {
-            0% { 
-                opacity: 0; 
-                transform: translateY(30px) scale(0.9); 
-            }
-            100% { 
-                opacity: 1; 
-                transform: translateY(0) scale(1); 
-            }
+            0% { opacity: 0; transform: translateY(30px) scale(0.9); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
         }
-      /* =========================================
-           💻 MATRIX BACKGROUND 💻
-           ========================================= */
+
+        /* Matrix Background */
         #matrix-bg {
             position: fixed;
             top: 0;
             left: 0;
             width: 100vw;
             height: 100vh;
-            z-index: -3; /* Keeps it strictly behind your main card */
+            z-index: -3;
             pointer-events: none;
         }
     </style>
 </head>
 <body>
-  <canvas id="matrix-bg"></canvas>
+    <canvas id="matrix-bg"></canvas>
 
     <div class="bg-glow glow-1"></div>
     <div class="bg-glow glow-2"></div>
@@ -230,8 +224,12 @@
                 <img src="IMG_20260312_043840_097.png" alt="Dipanjan Baidya" class="avatar">
             </div>
             <h1>Dipanjan Baidya</h1>
-            <div class="roles">BUISNESS | CODER | DESIGNER</div>
+            <div class="roles">BUSINESS | CODER | DESIGNER</div>
             <div class="location">Turning Ideas Into Reality. Kolkata, India.</div>
+        </div>
+
+        <div class="about-section">
+            Passionate about building digital experiences, exploring cyberpunk aesthetics, and pushing the boundaries of web development. Always learning, always building.
         </div>
 
         <div class="links-container">
@@ -265,7 +263,7 @@
                 </div>
             </a>
 
-            <a href="#" class="link-btn">
+            <a href="https://v-card-theta.vercel.app" class="link-btn" target="_blank">
                 <div class="icon-wrapper">
                     <i class="far fa-clock"></i>
                 </div>
@@ -276,6 +274,7 @@
             </a>
         </div>
     </div>
+
     <script>
         const canvas = document.getElementById('matrix-bg');
         const ctx = canvas.getContext('2d');
@@ -287,7 +286,6 @@
         let rainDrops = [];
 
         function initCanvas() {
-            // Handle High-DPI (Retina) displays for crisp text on phones
             const dpr = window.devicePixelRatio || 1;
             width = window.innerWidth;
             height = window.innerHeight;
@@ -296,26 +294,22 @@
             canvas.height = height * dpr;
             ctx.scale(dpr, dpr);
 
-            // Make font slightly smaller on phone screens to fit more code streams
             fontSize = width < 600 ? 12 : 16; 
             columns = Math.floor(width / fontSize);
 
             rainDrops = [];
             for (let x = 0; x < columns; x++) {
-                // Stagger the initial drops so they don't fall in a solid horizontal line
                 rainDrops[x] = Math.random() * -100; 
             }
         }
 
         initCanvas();
 
-        // Battery-saving frame rate controller
         let lastDrawTime = 0;
-        const fps = 30; // 30fps is perfect for Matrix rain without draining phone battery
+        const fps = 30; 
         const interval = 1000 / fps;
 
         const draw = (currentTime) => {
-            // requestAnimationFrame is much smoother and stops running if the user switches tabs
             requestAnimationFrame(draw);
 
             const deltaTime = currentTime - lastDrawTime;
@@ -329,7 +323,6 @@
             ctx.font = fontSize + 'px monospace';
 
             for (let i = 0; i < rainDrops.length; i++) {
-                // Only draw text if it's currently on the screen
                 if (rainDrops[i] * fontSize > 0) {
                     const text = alphabet.charAt(Math.floor(Math.random() * alphabet.length));
                     ctx.fillText(text, i * fontSize, rainDrops[i] * fontSize);
@@ -344,14 +337,12 @@
 
         requestAnimationFrame(draw);
 
-        // Smart Resize: Prevents the canvas from glitching when the mobile URL bar hides/shows
         let resizeTimer;
         let currentWidth = window.innerWidth;
         
         window.addEventListener('resize', () => {
             clearTimeout(resizeTimer);
             resizeTimer = setTimeout(() => {
-                // Only reset the canvas if the WIDTH changes (like rotating the phone)
                 if (window.innerWidth !== currentWidth) {
                     currentWidth = window.innerWidth;
                     initCanvas();
@@ -359,6 +350,5 @@
             }, 200);
         });
     </script>
-
 </body>
 </html>
